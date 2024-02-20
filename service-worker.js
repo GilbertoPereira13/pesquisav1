@@ -1,9 +1,10 @@
-const cacheName = 'v1';
+const cacheName = 'v1.1';
 const resourcesToPreload = [
   '/',
   'index.html',
   'styles.css',
   'script.js',
+  'manifest.json',
   'images/icon-192x192.png',
   'images/icon-512x512.png'
   // Adicione outros recursos que você queira armazenar em cache
