@@ -1,19 +1,27 @@
-const cacheName = 'site-static-v1.3';
+const cacheName = 'site-static-v1.4';
 const assets = [
     '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    'manifest.json',
+    '/pesquisav1/index.html',
+    '/pesquisav1/styles.css',
+    '/pesquisav1/script.js',
+    '/pesquisav1/manifest.json',
     '/pesquisav1/images/icon-192x192.png',
     '/pesquisav1/images/icon-512x512.png',
     // Adicione outros recursos necessários
 ];
 
-self.addEventListener('install', e => {
-    e.waitUntil(
-        caches.open(cacheName).then(cache => {
-            return cache.addAll(assets).catch(error => console.log('Falha ao cache assets:', error));
-        })
-    );
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // Retorna o recurso do cache se disponível
+        return response || fetch(event.request).then(fetchResponse => {
+          // Se o recurso for buscado com sucesso na rede, adicione-o ao cache
+          return caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, fetchResponse.clone());
+            return fetchResponse;
+          });
+        });
+      })
+  );
 });
