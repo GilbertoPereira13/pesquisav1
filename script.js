@@ -95,8 +95,20 @@ document.getElementById('formularioPesquisa').addEventListener('submit', functio
 
     alert('Dados salvos com sucesso!');
 
-    // Limpa os campos do formulário após o envio
-    document.getElementById('formularioPesquisa').reset();
+    // Limpa manualmente cada campo
+    document.getElementById('regiao').value = '';
+    document.getElementById('nome').value = '';
+    document.getElementById('telefone').value = '';
+    document.getElementById('sexo').value = '';
+    document.getElementById('idade').value = '';
+    document.getElementById('votoEspontaneo').value = '';
+    document.getElementById('votoCandidatos').value = '';
+    document.getElementById('segundaOpcaoVoto').value = '';
+    document.getElementById('votoVereador').value = '';
+    document.getElementById('problemaBairro').value = '';
+    document.getElementById('problemaCidade').value = '';
+    document.getElementById('avaliacaoGoverno').value = '';
+    document.getElementById('notaGoverno').value = '';
 });
 
 function verificarSenha() {
@@ -126,6 +138,7 @@ function exportarDadosParaCSV() {
 
     dadosRecuperados.forEach(function(obj) {
         var row = Object.values(obj).map(function(val){
+            // Assegura que strings com vírgulas sejam envoltas em aspas
             return typeof val === 'string' ? `"${val.replace(/"/g, '""')}"` : val;
         }).join(",");
         csvContent += row + "\r\n";
