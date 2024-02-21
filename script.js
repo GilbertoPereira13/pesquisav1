@@ -96,7 +96,7 @@ document.getElementById('formularioPesquisa').addEventListener('submit', functio
     alert('Dados salvos com sucesso!');
 
     // Limpa os campos do formulário após o envio
-    this.reset();
+    document.getElementById('formularioPesquisa').reset();
 });
 
 function verificarSenha() {
